@@ -11,10 +11,12 @@ import Foundation
 public class Response {
     public let urlRequest: URLRequest
     public let data: Data
+    public let headers: [AnyHashable:Any]
 
-    public init(urlRequest: URLRequest, data: Data) {
+    public init(urlRequest: URLRequest, data: Data, headers: [AnyHashable: Any]) {
         self.urlRequest = urlRequest
         self.data = data
+        self.headers = headers
     }
 
     public func map<D>(to type: D.Type) throws -> D where D : Decodable {

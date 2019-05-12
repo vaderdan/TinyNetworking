@@ -51,8 +51,8 @@ public class TinyNetworking<Resource: ResourceType>: TinyNetworkingType {
                 completion(.error(.requestFailed(data)))
                 return
             }
-
-            completion(.success(Response(urlRequest: request, data: data)))
+            
+            completion(.success(Response(urlRequest: request, data: data, headers: response.allHeaderFields)))
         }
     }
 }
