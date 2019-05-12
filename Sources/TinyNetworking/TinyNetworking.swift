@@ -52,7 +52,7 @@ public class TinyNetworking<Resource: ResourceType>: TinyNetworkingType {
                 return
             }
             
-            completion(.success(Response(urlRequest: request, data: data, headers: response.allHeaderFields)))
+            completion(.success(Response(statusCode: response.statusCode, data: data, request: request, response: response)))
         }
     }
 }

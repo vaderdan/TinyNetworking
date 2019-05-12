@@ -24,10 +24,7 @@ public extension Reactive where Base: TinyNetworkingType {
                 case let .error(apiError):
                     single(.error(apiError))
                 case let .success(response):
-                    single(.success(Response(
-                        urlRequest: response.urlRequest,
-                        data: response.data,
-                        headers: response.headers)
+                    single(.success(Response(statusCode: response.statusCode, data: response.data, request: response.request, response: response.response)
                         )
                     )
                 }

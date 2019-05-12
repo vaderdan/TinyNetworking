@@ -9,14 +9,34 @@
 import Foundation
 
 public class Response {
-    public let urlRequest: URLRequest
+    
+    public let statusCode: Int
+    
     public let data: Data
-    public let headers: [AnyHashable:Any]
-
-    public init(urlRequest: URLRequest, data: Data, headers: [AnyHashable: Any]) {
-        self.urlRequest = urlRequest
+    
+    public let request: URLRequest?
+    
+    public let response: HTTPURLResponse?
+    
+    public init(statusCode: Int, data: Data, request: URLRequest? = nil, response: HTTPURLResponse? = nil) {
+        self.statusCode = statusCode
         self.data = data
-        self.headers = headers
+        self.request = request
+        self.response = response
+    }
+    
+    public var description: String {
+        return "Status Code: \(statusCode), Data Length: \(data.count)"
+    }
+    
+    public var debugDescription: String {
+        return description
+    }
+    
+    public static func == (lhs: Response, rhs: Response) -> Bool {
+        return lhs.statusCode == rhs.statusCode
+            && lhs.data == rhs.data
+            && lhs.response == rhs.response
     }
 
     public func map<D>(to type: D.Type) throws -> D where D : Decodable {
